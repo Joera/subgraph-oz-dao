@@ -1,0 +1,102 @@
+specVersion: 0.0.2
+schema:
+  file: simple-poll.schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: governor
+    network: goerli
+    source:
+      address: "0x597940251F430283e6a7176c5267Ce9a689183bF"
+      abi: Governor
+      startBlock: 11633151
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Governor
+      abis:
+        - name: Governor
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/IGovernorTimelock.json
+      eventHandlers:
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(uint256,address,address[],uint256[],string[],bytes[],uint256,uint256,string)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: ProposalQueued(uint256,uint256)
+          handler: handleProposalQueued
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+      file: ../node_modules/@openzeppelin/subgraphs/src/datasources/governor.ts
+  - kind: ethereum/contract
+    name: voting
+    network: goerli
+    source:
+      address: "0x597940251F430283e6a7176c5267Ce9a689183bF"
+      abi: Voting
+      startBlock: 11633151
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Voting
+      abis:
+        - name: Voting
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/IVotes.json
+      eventHandlers:
+        - event: DelegateChanged(indexed address,indexed address,indexed address)
+          handler: handleDelegateChanged
+        - event: DelegateVotesChanged(indexed address,uint256,uint256)
+          handler: handleDelegateVotesChanged
+      file: ../node_modules/@openzeppelin/subgraphs/src/datasources/voting.ts
+  - kind: ethereum/contract
+    name: erc20
+    network: goerli
+    source:
+      address: "0xbe596c4F3Eafc74cd8F8f8976d84A2356306Bb13"
+      abi: IERC20
+      startBlock: 9917641
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ERC20Contract
+      abis:
+        - name: IERC20
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/IERC20Metadata.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,uint256)
+          handler: handleApproval
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer
+      file: ../node_modules/@openzeppelin/subgraphs/src/datasources/erc20.ts
+  - kind: ethereum/contract
+    name: timelock
+    network: goerli
+    source:
+      address: "0x41336D2f36356B437D419f0D2B8A85BDD3042f37"
+      abi: Timelock
+      startBlock: 9917642
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Timelock
+      abis:
+        - name: Timelock
+          file: ../node_modules/@openzeppelin/contracts/build/contracts/TimelockController.json
+      eventHandlers:
+        - event: CallScheduled(indexed bytes32,indexed uint256,address,uint256,bytes,bytes32,uint256)
+          handler: handleCallScheduled
+        - event: CallExecuted(indexed bytes32,indexed uint256,address,uint256,bytes)
+          handler: handleCallExecuted
+        - event: Cancelled(indexed bytes32)
+          handler: handleCancelled
+        - event: MinDelayChange(uint256,uint256)
+          handler: handleMinDelayChange
+      file: ../node_modules/@openzeppelin/subgraphs/src/datasources/timelock.ts
