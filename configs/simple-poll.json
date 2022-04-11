@@ -1,9 +1,9 @@
 {
-    "output": "generated/simple-poll.",
+    "output": "generated/",
     "chain": "goerli",
     "datasources": [
-        { "address": "0x597940251F430283e6a7176c5267Ce9a689183bF", "startBlock": 11633151, "module": [ "governor", "voting" ] },
-        { "address": "0xbe596c4F3Eafc74cd8F8f8976d84A2356306Bb13", "startBlock":  9917641, "module": "erc20" },
-        { "address": "0x41336D2f36356B437D419f0D2B8A85BDD3042f37", "startBlock":  9917642, "module": "timelock" }
+        { "address": "0x597940251F430283e6a7176c5267Ce9a689183bF", "startBlock": 6575000, "module": [ "governor", "voting" ] },
+        { "address": "0xbe596c4F3Eafc74cd8F8f8976d84A2356306Bb13", "startBlock": 6575000, "module": "erc20" },
+        { "address": "0x41336D2f36356B437D419f0D2B8A85BDD3042f37", "startBlock": 6575000, "module": "timelock" }
     ]
 }

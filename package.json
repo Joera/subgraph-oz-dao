@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "compile": "npx graph-compiler --config configs/simple-poll.json --include node_modules/@openzeppelin/subgraphs/src/datasources --export-schema --export-subgraph",
-    "deploy": "npx graph-cli codegen generated/simple-poll.subgraph.yaml"
+    "deploy": "cd genereated && graph deploy joera/verins-poll" 
   },
   "author": "",
   "license": "ISC",
